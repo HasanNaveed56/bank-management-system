@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, session
 from model import Bank
 from db import init_db
@@ -111,4 +112,4 @@ def logout():
 # ---------------- START SERVER ----------------
 if __name__ == "__main__":
     init_db()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
