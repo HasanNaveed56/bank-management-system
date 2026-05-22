@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    ports:
+      - mode: ingress
+        target: 5000
+        published: 5000
+    command: python app.py
+    # This application uses SQLite (bank.db). Defang does not support volumes,
+    # so the database file will be part of the container image.
+    # For production, consider using a managed database service like PostgreSQL
+    # and updating the application to connect to it.
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.25"
+          memory: 256M
